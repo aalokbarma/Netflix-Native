@@ -70,6 +70,7 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           title: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color= { color } />,
           // headerRight: () => (
           //   <Pressable

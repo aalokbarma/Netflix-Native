@@ -35,3 +35,15 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export type ListItemProps = {
+  id: string,
+  poster: string
+}
+export type PopularType = {
+  // content:{
+  //   title: string,
+  //   movies: string,
+  // },
+  content: object,
+}

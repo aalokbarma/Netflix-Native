@@ -1,12 +1,28 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import * as React from 'react';
+import styles from '../Styles/home';
 
-const HomeScreen = () => {
-    return (
-        <View>
-            <Text>This is Home Screen Page.</Text>
-        </View>
-    )
+import { Text, View, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import { RootTabScreenProps } from '../types';
+import Popular from '../components/Popular';
+import categories from '../Data/categories';
+
+const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        <Popular content = {categories.items[0]} />
+        <Popular content = {categories.items[1]} />
+        <Popular content = {categories.items[2]} />
+        <Popular content = {categories.items[3]} />
+        <Popular content = {categories.items[4]} />
+      </ScrollView>
+      {/* <FlatList
+          data ={categories.items}
+          renderItem={({item}) => <Popular id = {item.id} content = {item} />}
+          keyExtractor={item => item.id}
+      /> */}
+    </View>
+  );
 }
 
-export default HomeScreen
+export default HomeScreen;
