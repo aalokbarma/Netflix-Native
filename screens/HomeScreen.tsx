@@ -10,11 +10,11 @@ const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
   return (
     <View style={styles.container}>
       <ScrollView>
-        <Popular content = {categories.items[0]} />
-        <Popular content = {categories.items[1]} />
-        <Popular content = {categories.items[2]} />
-        <Popular content = {categories.items[3]} />
-        <Popular content = {categories.items[4]} />
+        <Popular content = {categories.items[0]} navigation = {navigation} />
+        <Popular content = {categories.items[1]} navigation = {navigation} />
+        <Popular content = {categories.items[2]} navigation = {navigation} />
+        <Popular content = {categories.items[3]} navigation = {navigation} />
+        <Popular content = {categories.items[4]} navigation = {navigation} />
       </ScrollView>
       {/* <FlatList
           data ={categories.items}

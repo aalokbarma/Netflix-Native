@@ -3,23 +3,26 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { AntDesign, MaterialIcons, Ionicons, FontAwesome, MaterialCommunityIcons  } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, Ionicons, FontAwesome, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, Image, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
+import MovieDetailsScreen from '../screens/MovieDetailsScreen';
 import ComingSoonScreen from '../screens/ComingSoonScreen';
 import SearchScreen from '../screens/SearchScreen';
 import DownloadScreen from '../screens/DownloadScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import styles from '../Styles/home';
+// import logo from '../assets/images/cloneDecoded.jpg';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -50,6 +53,37 @@ function RootNavigator() {
   );
 }
 
+const HomeStack = createNativeStackNavigator<RootStackParamList>();
+
+function HomeScreenStack() {
+  const colorScheme = useColorScheme();
+  return(
+    <HomeStack.Navigator
+    >
+      <HomeStack.Screen name="Home"
+      component={HomeScreen}
+      options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        title: 'Home',
+        headerShown: false,
+        tabBarIcon: () => <AntDesign name="home" size={24} color= '#E50914' />,
+      })} />
+      <HomeStack.Screen name ="MovieDetails"
+      component={MovieDetailsScreen}
+      options={({ navigation }: RootTabScreenProps<'MovieDetails'>) => ({
+        title: '',
+        headerRight: () => (
+          <>
+            <Feather style = {{margin: 5,}} name="cast" size={25} color= '#ffffff' />
+            {/* <MaterialIcons name="live-tv" size={30} color= '#ffffff' /> */}
+            <Image style = {styles.profileLogo} source = {require('../assets/images/cloneDecoded.jpg')} />
+          </>
+        ),
+        tabBarIcon: () => <AntDesign name="home" size={24} color= '#E50914' />,
+      })} />
+    </HomeStack.Navigator>
+  )
+}
+
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
@@ -61,31 +95,17 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeStack"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
+        name="HomeStack"
+        component={HomeScreenStack}
+        options={({ navigation }: RootTabScreenProps<'HomeStack'>) => ({
           title: 'Home',
           headerShown: false,
           tabBarIcon: ({ color }) => <AntDesign name="home" size={24} color= { color } />,
-          // headerRight: () => (
-          //   <Pressable
-          //     onPress={() => navigation.navigate('Modal')}
-          //     style={({ pressed }) => ({
-          //       opacity: pressed ? 0.5 : 1,
-          //     })}>
-          //     <FontAwesome
-          //       name="info-circle"
-          //       size={25}
-          //       color={Colors[colorScheme].text}
-          //       style={{ marginRight: 15 }}
-          //     />
-          //   </Pressable>
-          // ),
         })}
       />
       <BottomTab.Screen

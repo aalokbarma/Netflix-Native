@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 import styles from './style';
 import { PopularType } from '../../types';
 
-const Popular = ({content}: PopularType) => {
+const Popular = ({content, navigation}: PopularType) => {
 
 
     return (
@@ -12,7 +12,7 @@ const Popular = ({content}: PopularType) => {
             <Text style = {styles.heading}>{content.title}</Text>
             <FlatList
                 data ={content.movies}
-                renderItem={({item}) => <ListItem id = {item.id} poster = {item.poster} />}
+                renderItem={({item}) => <ListItem id = {item.id} poster = {item.poster} navigations = {navigation}/>}
                 keyExtractor={item => item.id}
                 horizontal = {true}
             />

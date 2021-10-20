@@ -1,10 +1,12 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { ListItemProps } from '../../../types';
 import styles from './style';
 
-const ListItem = ({id, poster} : ListItemProps) => {
+const ListItem = ({id, poster, navigations} : ListItemProps) => {
     return (
+      <TouchableOpacity onPress = {() => {
+        navigations.navigate('MovieDetails')}}>
         <Image
         key = {id}
         style={styles.popularImage}
@@ -13,6 +15,7 @@ const ListItem = ({id, poster} : ListItemProps) => {
             poster,
         }}
       />
+      </TouchableOpacity>
     )
 }
 

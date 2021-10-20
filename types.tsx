@@ -17,6 +17,8 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   NotFound: undefined;
+  Home: undefined;
+  MovieDetails: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -26,9 +28,11 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type RootTabParamList = {
   Home: undefined;
+  HomeStack: undefined;
   ComingSoon: undefined;
   Search: undefined;
   Download: undefined;
+  MovieDetails: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -38,7 +42,8 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 
 export type ListItemProps = {
   id: string,
-  poster: string
+  poster: string,
+  navigations: any,
 }
 export type PopularType = {
   // content:{
@@ -46,4 +51,17 @@ export type PopularType = {
   //   movies: string,
   // },
   content: object,
+  navigation: any,
+}
+
+export type episodeItemTypes = {
+  episode: {
+    duration: string,
+    id: string,
+    plot: string,
+    poster: string,
+    title: string,
+    video: string,
+  },
+  id: string,
 }

@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       paddingTop: 25,
       flexDirection: 'column',
+      backgroundColor: '#000',
     },
     title: {
       fontSize: 20,
@@ -16,6 +17,12 @@ const styles = StyleSheet.create({
       marginVertical: 30,
       height: 1,
       width: '80%',
+    },
+    profileLogo: {
+      width: 25,
+      height: 25,
+      borderRadius: 15,
+      margin: 5,
     },
   });
 
