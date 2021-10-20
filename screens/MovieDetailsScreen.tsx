@@ -6,6 +6,7 @@ import movie from '../Data/movie';
 import { MaterialIcons, FontAwesome, Feather, Ionicons, AntDesign } from '@expo/vector-icons';
 import EpisodeItem from '../components/EpisodeItem';
 import { Picker } from '@react-native-community/picker';
+import VideoPlayer from '../components/VideoPlayer';
 
 const MovieDetailsScreen = () => {
 
@@ -14,6 +15,7 @@ const MovieDetailsScreen = () => {
 
     const [currentSeasons, setCurrentSeasons] = useState(firstSeason);
     const [seasonsData, setSeasonsData] = useState(movies.seasons.items[0].episodes.items);
+    const [currentEpisode, setCurrentEpisode] = useState(firstSeason.episodes.items[0]);
 
     // const updateSeason = (seasons: string) => {
     //     setSeasons(seasons)
@@ -33,8 +35,9 @@ const MovieDetailsScreen = () => {
 
     return (
         <View style={styles.movieDetailsContainer}>
-            <Image style = {styles.seasonPoster} source = {{uri: firstEpisode.poster}} />
-            <ScrollView>
+            <VideoPlayer  episode = {currentEpisode} />
+            {/* <Image style = {styles.seasonPoster} source = {{uri: firstEpisode.poster}} /> */}
+            <ScrollView style = {styles.scrollViewContainer}>
                 <View style = {styles.infoContainer}>
                     <Text style = {styles.title}>{movie.title}</Text>
                     <View style = {styles.flexContainer}>
@@ -85,6 +88,7 @@ const MovieDetailsScreen = () => {
                         <Picker 
                             style = {styles.seasonsDropdown}
                             selectedValue = {currentSeasons.name} 
+                            
                             onValueChange = {(itemValue, itemIndex) => {
                                 setCurrentSeasons(movie.seasons.items[itemIndex])
                             }}
@@ -101,7 +105,7 @@ const MovieDetailsScreen = () => {
                     </View> */}
                     <FlatList
                         data = {currentSeasons.episodes.items}
-                        renderItem = {({item}) => <EpisodeItem id = {item.id} episode = {item} />}
+                        renderItem = {({item}) => <EpisodeItem id = {item.id} episode = {item} onPress = {setCurrentEpisode} />}
                     />
                 </View>
             </ScrollView>

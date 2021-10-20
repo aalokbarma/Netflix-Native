@@ -9,7 +9,7 @@ import categories from '../Data/categories';
 const HomeScreen = ({ navigation }: RootTabScreenProps<'Home'>) => {
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.scrollViewContainer}>
         <Popular content = {categories.items[0]} navigation = {navigation} />
         <Popular content = {categories.items[1]} navigation = {navigation} />
         <Popular content = {categories.items[2]} navigation = {navigation} />

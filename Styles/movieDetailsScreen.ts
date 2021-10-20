@@ -143,8 +143,11 @@ const styles  = StyleSheet.create({
         color: '#555',
     },
     seasonsDropdown: {
-        width: 150,
+        width: 130,
         color: '#555',
+    },
+    scrollViewContainer:{
+        flexDirection: 'column',
     },
 });
 

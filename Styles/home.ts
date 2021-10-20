@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
       flexDirection: 'column',
       backgroundColor: '#000',
     },
+    scrollViewContainer: {
+      flexDirection: 'column',
+    },
     title: {
       fontSize: 20,
       fontWeight: 'bold',

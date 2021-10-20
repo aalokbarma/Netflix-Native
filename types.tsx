@@ -63,5 +63,15 @@ export type episodeItemTypes = {
     title: string,
     video: string,
   },
+  onPress: (episode: {
+    duration: string,
+    id: string,
+    plot: string,
+    poster: string,
+    title: string,
+    video: string,
+  }) => {
+
+  },
   id: string,
 }
