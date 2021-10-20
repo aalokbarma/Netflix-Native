@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, SafeAreaView, Image, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import styles from '../Styles/movieDetailsScreen';
 import movies from '../Data/movie';
 import movie from '../Data/movie';
 import { MaterialIcons, FontAwesome, Feather, Ionicons, AntDesign } from '@expo/vector-icons';
 import EpisodeItem from '../components/EpisodeItem';
+import { Picker } from '@react-native-community/picker';
 
 const MovieDetailsScreen = () => {
+
+    const firstSeason = movie.seasons.items[0];
+    const firstEpisode = movies.seasons.items[0].episodes.items[0];
+
+    const [currentSeasons, setCurrentSeasons] = useState(firstSeason);
+    const [seasonsData, setSeasonsData] = useState(movies.seasons.items[0].episodes.items);
+
+    // const updateSeason = (seasons: string) => {
+    //     setSeasons(seasons)
+    //     if(seasons == "season1"){
+    //         setSeasonsData(movies.seasons.items[0].episodes.items)
+    //     }else if(seasons == "season2"){
+    //         setSeasonsData(movies.seasons.items[1].episodes.items)
+    //     }
+    //  }
+    //  console.log(seasons);
+
     // console.log(movies.seasons.items[0].episodes.items[0].poster)
-    const firstEpisode = movies.seasons.items[0].episodes.items[0]
+    
+
+    const seasonNames = movies.seasons.items.map(season => season.name);
+
+
     return (
         <View style={styles.movieDetailsContainer}>
             <Image style = {styles.seasonPoster} source = {{uri: firstEpisode.poster}} />
@@ -57,15 +79,28 @@ const MovieDetailsScreen = () => {
                         <Text style = {[styles.episodesText, styles.episodesText1]}>EPISODES</Text>
                         <Text style = {[styles.episodesText, styles.episodesText2]}>MORE LIKE THIS</Text>
                     </View>
-                    <View style = {styles.seasonsTextContainer}>
-                        <Text style = {styles.seasonsText}>Season1</Text>
-                        <MaterialIcons name="keyboard-arrow-down" size={24} color="#555" />
-                    </View>
+                    {/* <View style = {styles.seasonsTextContainer}> */}
+                        {/* <Text style = {styles.seasonsText}>Season1</Text>
+                        <MaterialIcons name="keyboard-arrow-down" size={24} color="#555" /> */}
+                        <Picker 
+                            style = {styles.seasonsDropdown}
+                            selectedValue = {currentSeasons.name} 
+                            onValueChange = {(itemValue, itemIndex) => {
+                                setCurrentSeasons(movie.seasons.items[itemIndex])
+                            }}
+                        >
+                            {seasonNames.map(seasonName => (
+                                <Picker.Item label = {seasonName} value = {seasonName} />
+                            ))}
+                            {/* <Picker.Item label = "Season 1" value = "season1" />
+                            <Picker.Item label = "Season 2" value = "season2" /> */}
+                        </Picker>
+                    {/* </View> */}
                     {/* <View>
                         <EpisodeItem episode = {firstEpisode} />
                     </View> */}
                     <FlatList
-                        data = {movies.seasons.items[0].episodes.items}
+                        data = {currentSeasons.episodes.items}
                         renderItem = {({item}) => <EpisodeItem id = {item.id} episode = {item} />}
                     />
                 </View>

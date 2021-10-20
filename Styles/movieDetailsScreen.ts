@@ -142,6 +142,10 @@ const styles  = StyleSheet.create({
     seasonsText: {
         color: '#555',
     },
+    seasonsDropdown: {
+        width: 150,
+        color: '#555',
+    },
 });
 
 export default styles;
