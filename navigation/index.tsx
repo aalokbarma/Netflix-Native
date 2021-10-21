@@ -23,9 +23,12 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 import styles from '../Styles/home';
 // import logo from '../assets/images/cloneDecoded.jpg';
+import { Auth } from 'aws-amplify';
 
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+
+  
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -57,6 +60,9 @@ const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
 function HomeScreenStack() {
   const colorScheme = useColorScheme();
+  const onLogOut = () => {
+    Auth.signOut();
+  }
   return(
     <HomeStack.Navigator
     >
@@ -75,7 +81,9 @@ function HomeScreenStack() {
           <>
             <Feather style = {{margin: 5,}} name="cast" size={25} color= '#ffffff' />
             {/* <MaterialIcons name="live-tv" size={30} color= '#ffffff' /> */}
-            <Image style = {styles.profileLogo} source = {require('../assets/images/cloneDecoded.jpg')} />
+            <Pressable onPress = {onLogOut}>
+              <Image style = {styles.profileLogo} source = {require('../assets/images/cloneDecoded.jpg')} />
+            </Pressable>
           </>
         ),
         tabBarIcon: () => <AntDesign name="home" size={24} color= '#E50914' />,
